@@ -1,0 +1,23 @@
+{
+  "id": "PD_TBDWorkshopAttendee_AMS1",
+  "name": "Credentials Verification for TBD VC Workshop Attendee",
+  "purpose": "To verify the applicant's attendance at the Verifiable Credentials Workshop",
+  "input_descriptors": [
+    {
+      "id": "attendanceVerification",
+      "name": "Workshop Attendance",
+      "purpose": "Verify the applicant's attendance",
+      "constraints": {
+        "fields": [
+          {
+            "path": ["$.type[*]"],
+            "filter": {
+              "type": "string",
+              "pattern": "WorkshopAttendee"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
