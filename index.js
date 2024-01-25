@@ -28,7 +28,6 @@ import pd from "./presentation-definition.json" assert { type: "json" };
     }
 
     // STEP 3: Validate the presentation definition
-    // validate presentation definition
     const validation = PresentationExchange.validateDefinition({
         presentationDefinition: pd
     });
@@ -44,7 +43,7 @@ import pd from "./presentation-definition.json" assert { type: "json" };
         data: {
             "name": "Alice Smith",
             "location": "Amsterdam",
-            "eventDate": "2024-01-01T00:00:00Z",
+            "eventDate": "2024-02-29T00:00:00Z",
         }
     });
 
@@ -56,5 +55,3 @@ import pd from "./presentation-definition.json" assert { type: "json" };
     console.log("VC JWT:", vc_jwt_attendee);
 
     // STEP 5: [Optional] Store VC in a DWN.
-
-
