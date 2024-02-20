@@ -23,7 +23,8 @@ import pd from "./presentation-definition.json" assert { type: "json" };
         await storeDID(filename, attendee);
 
     } else {
-        attendee = existingDID;
+
+        attendee = await DidDht.import({ portableDid: existingDID });
     }
 
     // STEP 3: Create a verifiable credential
