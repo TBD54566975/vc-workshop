@@ -12,7 +12,8 @@ export async function loadDID(filename) {
 
 export async function storeDID(filename, did) {
     try {
-        await fs.writeFile(filename, JSON.stringify(did, null, 2));
+        const portableDid = await did.export();
+        await fs.writeFile(filename, JSON.stringify(portableDid, null, 2));
         return true;
     } catch (error) {
         console.error('Error writing to file:', error)

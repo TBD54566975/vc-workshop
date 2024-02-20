@@ -1,13 +1,12 @@
 import { VerifiableCredential, PresentationExchange } from "@web5/credentials";
-import { DidDhtMethod } from "@web5/dids";
+import { DidDht } from "@web5/dids";
 import { loadDID, storeDID } from "./utils.js";
 
 import pd from "./presentation-definition.json" assert { type: "json" };
 
     // STEP 0: Set filepath to use or store DID.
     const filename = "./did.json";
-    let portableDID;
-
+    let attendee;
 
     //STEP 1: Check if user already has a DID
     const existingDID = await loadDID(filename);
@@ -15,43 +14,36 @@ import pd from "./presentation-definition.json" assert { type: "json" };
     // STEP 2: If not, create a new DID and store it in a file.
     if(!existingDID) {
         // creates a DID using the DHT method and publishes the DID document to the DHT
-        portableDID = await DidDhtMethod.create({ publish: true });
+        attendee = await DidDht.create();
 
-        console.log("DID:", portableDID.did);
-        console.log("DID Document:", portableDID.didDocument);
-        console.log("DIDDht:", portableDID);
+        console.log("DID:", attendee.uri);
+        console.log("DID Document:", attendee.document);
+        console.log("DIDDht:", attendee);
 
-        await storeDID(filename, portableDID);
+        await storeDID(filename, attendee);
 
     } else {
-        portableDID = existingDID;
+        attendee = existingDID;
     }
 
-    // STEP 3: Validate the presentation definition
-    const validation = PresentationExchange.validateDefinition({
-        presentationDefinition: pd
-    });
-    console.log(validation);
-
-
-    // STEP 4: Create a verifiable credential
+    // STEP 3: Create a verifiable credential
     const vc = await VerifiableCredential.create({
         type: 'WorkshopAttendeeCredential',
-        issuer: portableDID.did,
-        subject: portableDID.did,
+        issuer: attendee.uri,
+        subject: attendee.uri,
         expirationDate: '2024-12-31T23:59:59Z',
         data: {
-            "name": "Alice Smith",
+            "name": "Jane Doe",
             "location": "Amsterdam",
-            "eventDate": "2024-02-29T00:00:00Z",
+            "conference": "JSWorld 2024",
+            "eventDate": "2024-03-01T00:00:00Z",
+            "issuerName": "Jane Doe",
         }
     });
 
     console.log("VC:", vc);
 
-    // STEP 5: Sign VC and get JWT.
-    //sign with PortableDid
-    const vc_jwt_attendee = await vc.sign({ did: portableDID });
+    // STEP 4: Sign VC and get JWT.
+    //sign with attendee
+    const vc_jwt_attendee = await vc.sign({ did: attendee });
     console.log("VC JWT:", vc_jwt_attendee);
-
-    // STEP 5: [Optional] Store VC in a DWN.
