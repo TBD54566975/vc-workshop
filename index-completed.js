@@ -1,6 +1,8 @@
-import { VerifiableCredential } from "@web5/credentials";
+import { VerifiableCredential, PresentationExchange } from "@web5/credentials";
 import { DidDht } from "@web5/dids";
 import { loadDID, storeDID } from "./utils.js";
+
+import pd from "./presentation-definition.json" assert { type: "json" };
 
     // STEP 0: Set filepath to use or store DID.
     const filename = "./did.json";
@@ -25,7 +27,23 @@ import { loadDID, storeDID } from "./utils.js";
         console.log('attendee', attendee);
     }
 
-    // TODO: STEP 2: Create a verifiable credential
+    // STEP 2: Create a verifiable credential
+    const vc = await VerifiableCredential.create({
+        type: 'WorkshopAttendeeCredential',
+        issuer: attendee.uri,
+        subject: attendee.uri,
+        expirationDate: '2024-12-31T23:59:59Z',
+        data: {
+            "name": "Jane Doe",
+            "location": "Amsterdam",
+            "conference": "JSWorld 2024",
+            "eventDate": "2024-03-01T00:00:00Z",
+            "issuerName": "Jane Doe",
+        }
+    });
 
+    console.log("VC:", vc);
 
-    // TODO: STEP 3: Sign VC with DID and get JWT.
+    // STEP 3: Sign VC and get JWT.
+    const vc_jwt_attendee = await vc.sign({ did: attendee });
+    console.log("VC JWT:", vc_jwt_attendee);
