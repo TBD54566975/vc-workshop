@@ -4,7 +4,7 @@ import { loadDID, storeDID } from "./utils.js";
 
     // STEP 0: Set filepath to use or store DID
     const filename = "./did.json";
-    let attendee;
+    let attendeeDid;
 
     //STEP 1: Creates and stores new DID if one doesn't exist
     const existingDID = await loadDID(filename);
@@ -17,9 +17,9 @@ import { loadDID, storeDID } from "./utils.js";
 
         console.log("DID:", attendeeDid.uri);
         console.log("DID Document:", attendeeDid.document);
-        console.log("DIDDht:", attendee);
+        console.log("DIDDht:", attendeeDid);
 
-        await storeDID(filename, attendee);
+        await storeDID(filename, attendeeDid);
 
     } else {
         attendeeDid = await DidDht.import({ portableDid: existingDID });
