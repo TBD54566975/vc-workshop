@@ -2,30 +2,37 @@ import { VerifiableCredential } from "@web5/credentials";
 import { DidDht } from "@web5/dids";
 import { loadDID, storeDID } from "./utils.js";
 
-    // STEP 0: Set filepath to use or store DID.
+    // STEP 0: Set filepath to use or store DID
     const filename = "./did.json";
-    let attendee;
+    let attendeeDid;
 
-    //STEP 1: Check if user already has a DID, if not create a new DID and store it in a file.
+    //STEP 1: Creates and stores new DID if one doesn't exist
     const existingDID = await loadDID(filename);
 
     if(!existingDID) {
-        // creates a DID using the DHT method and publishes the DID document to the DHT
-        attendee = await DidDht.create();
+        // creates a DID
+        attendeeDid = await DidDht.create({ 
+            options:{ publish: true }
+        }); 
 
-        console.log("DID:", attendee.uri);
-        console.log("DID Document:", attendee.document);
-        console.log("DIDDht:", attendee);
+        console.log("DID:", attendeeDid.uri);
+        console.log("DID Document:", attendeeDid.document);
+        console.log("DIDDht:", attendeeDid);
 
-        await storeDID(filename, attendee);
+        await storeDID(filename, attendeeDid);
 
     } else {
-
-        attendee = await DidDht.import({ portableDid: existingDID });
-        console.log('attendee', attendee);
+        attendeeDid = await DidDht.import({ portableDid: existingDID });
+        console.log('attendee', attendeeDid);
     }
 
     // TODO: STEP 2: Create a verifiable credential
 
 
-    // TODO: STEP 3: Sign VC with DID and get JWT.
+
+    // TODO: STEP 3: Sign VC with DID and get JWT
+
+
+
+    // TODO: STEP 4: Examine VC: https://jwt.io/
+    // TODO: STEP 5: Present VC: https://web5-vc.netlify.app/
