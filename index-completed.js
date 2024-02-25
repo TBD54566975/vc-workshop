@@ -37,7 +37,7 @@ import pd from "./presentation-definition.json" assert { type: "json" };
         data: {
             "name": "Jane Doe",
             "location": "Amsterdam",
-            "conference": "JSWorld 2024",
+            "conference": "DevWorld 2024",
             "eventDate": "2024-03-01T00:00:00Z",
             "issuerName": "Jane Doe",
         }
