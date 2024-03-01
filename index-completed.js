@@ -13,7 +13,7 @@ import pd from "./presentation-definition.json" assert { type: "json" };
 
     if(!existingDID) {
         // creates a DID
-        attendeeDid = await DidDht.create({ 
+        attendeeDid = await DidDht.create({
             options:{ publish: true }
         });
 
@@ -46,9 +46,8 @@ import pd from "./presentation-definition.json" assert { type: "json" };
     console.log("VC:", vc);
 
     // STEP 3: Sign VC and get JWT
-    const vc_jwt_attendee = await vc.sign({ did: attendeeDid });
-    console.log("VC JWT:", vc_jwt_attendee);
+    const signedVC = await vc.sign({ did: attendeeDid });
+    console.log("Signed VC:", signedVC);
 
     // TODO: STEP 4: Examine VC: https://jwt.io/
     // TODO: STEP 5: Present VC: https://web5-vc.netlify.app/
-

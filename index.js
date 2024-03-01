@@ -11,9 +11,9 @@ import { loadDID, storeDID } from "./utils.js";
 
     if(!existingDID) {
         // creates a DID
-        attendeeDid = await DidDht.create({ 
+        attendeeDid = await DidDht.create({
             options:{ publish: true }
-        }); 
+        });
 
         console.log("DID:", attendeeDid.uri);
         console.log("DID Document:", attendeeDid.document);
@@ -29,8 +29,7 @@ import { loadDID, storeDID } from "./utils.js";
     // TODO: STEP 2: Create a verifiable credential
 
 
-
-    // TODO: STEP 3: Sign VC with DID and get JWT
+    // TODO: STEP 3: Cryptographically sign VC with DID and get JWT
 
 
 
