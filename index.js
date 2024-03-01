@@ -15,9 +15,7 @@ import { loadDID, storeDID } from "./utils.js";
             options:{ publish: true }
         });
 
-        console.log("DID:", attendeeDid.uri);
-        console.log("DID Document:", attendeeDid.document);
-        console.log("DIDDht:", attendeeDid);
+        console.log("DID:", attendeeDid);
 
         await storeDID(filename, attendeeDid);
 
