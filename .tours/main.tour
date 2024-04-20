@@ -1,0 +1,90 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "main",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "Hi there! This is a guided tour to help you about Verifiable Credentials. We will build a Workshop Attendee Credential in JavaScript. We will create a self-signed VC where you're attesting that you attended the workshop.\n\nPress `Next` to to get started 👇"
+    },
+    {
+      "file": "package.json",
+      "line": 1,
+      "description": "Run `npm install` to install the web5/credentials package and the web5/dids package, so we can start building. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 1,
+      "description": "For each actor participating in the Verifiable Credential -- the issuer, the holder (sometimes called subject), and the verifier. We need some kind of identifier for each participating person. In the Web5 ecosystem, we use Decentralized Identifiers -- a W3C standard. These are globally unique identifiers.\n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 14,
+      "description": "We already handle creating the Decentralized Identifier for you, so you don't have to create it yourself, but you can take a look at how we do it. We use `DidDht.create()` to create a Decentralized Identifier.\n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 24,
+      "description": "Run `node index.js` in your terminal, so we can see the contents of our Decentralized Identifier.\n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 28,
+      "description": "Now, let's create a variable to hold our Verifiable Credential using `const vc =`. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 28,
+      "description": "Let's use the Verifiable Credential package. Assign the `vc` variable that you made to `await VerifiableCredential.create({}) \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 29,
+      "description": "Set the type of credential to `'type': 'WorkshopAttendeeCredential'`. This field is important. The verifier is looking for this exact value. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 30,
+      "description": "Set the issuer to `'issuer': 'attendeeDid.uri'`. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 31,
+      "description": "Set the subject to `'subject': 'attendeeDid.uri'`. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 31,
+      "description": "Expiration Date is an optional field. We can give this an expiration date of when you can no longer use this VC to retrieve swag. Set the expirationDate to `'expirationDate': '2024-12-31T23:59:59Z',`. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 32,
+      "description": "Create a data object where we will store additional information and claims about the subject receiving the credential `data: {}`. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 33,
+      "description": "In our data object, we want to set the name of the subject, location, conference, eventDate, and issuerName. \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 34,
+      "description": "Log our vc to see how it looks! \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 48,
+      "description": "To convert the VC into a JWT, we need to sign the VC with `await vc.sign({ did: attendeeDid });` \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "file": "index.js",
+      "line": 49,
+      "description": "Print the JWT and examine the contents at jwt.io \n\nPress `Next` to to get continue 👇"
+    },
+    {
+      "title": "Try it out!",
+      "description": "Now that we successfully created a VC, we can submit the JWT to the verifier to claim your swag at this link https://web5-vc.netlify.app/! 🎉\n\nPress `Finish` to end the tour."
+    }
+  ],
+  "ref": "main"
+}
